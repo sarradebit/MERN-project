@@ -19,7 +19,7 @@ try {
         cloudinary_id: result.public_id,
     });
     await newContact.save();
-    res.status(200).send({msg : "contact added successfully" , newContact})
+    res.status(200).send({msg : "contact added successfully !" , newContact})
 } 
 catch (error) { 
     res.status(400).send({msg : "can not add this contact" , error})
