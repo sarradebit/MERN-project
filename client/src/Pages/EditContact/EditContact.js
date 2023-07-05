@@ -17,7 +17,7 @@ const EditContact = () => {
   const load = useSelector(state => state.contactReducer.load);
 
   const handleChange = (e) => {
-    setNewContact({...newContact , [e.target.value] : e.target.name})
+    setNewContact({...newContact , [e.target.name] : e.target.value})
   }
   
   useEffect(()=> {
@@ -34,7 +34,7 @@ const handleEdit = (e) => {
   data.append("email" , newContact.email);
   data.append("image", file)
   dispatch(editContact(match.params.id,data));
-
+  navigate(-1)
 };
   
   return (

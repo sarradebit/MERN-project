@@ -19,7 +19,7 @@ const ListContact = () => {
       <div style={{display : "flex" , flexDirection :"row" , justifyContent :"space-around" , flexWrap :"wrap"}}>
       {load? 
     <CircularProgress sx={{color :"black" , display :"flex" , alignItems : "center" , justifyContent : "center" ,  m : "auto" , mb : "45%" }} size="3.5rem" />:
-    listContacts.map((el)=> <ContactCard  contact={el} key={el._id} /> )
+    listContacts?.map((el)=> <ContactCard  contact={el} key={el._id} /> )
       }
 
       </div>

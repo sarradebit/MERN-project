@@ -8,7 +8,7 @@ export const getContacts = () => async (dispatch) => {
     dispatch({type :LOAD_CONTACTS })
     try {
         let result = await axios.get('/api/contact/all-user')
- dispatch ({type : GET_CONTACTS, payload : result.data.listContacts })
+ dispatch ({type : GET_CONTACTS, payload : result.data.listContacts})
     } catch (error) {
         dispatch ({type : FAIL_CONTACTS , payload : error.response})
     }
@@ -33,11 +33,12 @@ try {
     dispatch ({type : FAIL_CONTACTS , payload : error.response})
 }
 }
-export const editContact = (id,newContact ) => async (dispatch) => {
+export const editContact = (id,newContact) => async (dispatch) => {
     dispatch({type :LOAD_CONTACTS }) 
     try {
         await axios.put(`/api/contact/${id}` , newContact)
         dispatch (getContacts())
+
     } catch (error) {
         dispatch ({type : FAIL_CONTACTS , payload : error.response})
     }

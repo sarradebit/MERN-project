@@ -1,4 +1,5 @@
 const User = require("../Model/User")
+const bcrypt = require ("bcrypt")
 
 exports.register = async(req,res) => {
     try {
