@@ -3,12 +3,12 @@ const Contact = require ("../Model/Contact")
 const cloudinary = require("../Middlewares/cloudinary");
 const upload = require("../Middlewares/multer");
 const router = express.Router ();
-
+const isAuth = require("../MiddleWares/isAuth")
 // router.get("/test",(req,res)=>{
 //     res.send("api is running")
 // })
 
-router.post('/add-contact',upload.single("image") , async(req,res) => {
+router.post('/add-contact',isAuth,upload.single("image") , async(req,res) => {
 try {
     const result = await cloudinary.uploader.upload(req.file.path);
     let newContact = new Contact({

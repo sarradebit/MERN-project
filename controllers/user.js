@@ -45,3 +45,39 @@ exports.login = async (req,res) => {
         
     }
 }
+
+exports.updateUserPassword = async (req,res) => {
+  const { oldPassword , password , confirmpassword} = req.body;
+  const {_id}= req.params;
+  try {
+    // get user
+    const user = await User.findById(req.params);
+    if (!user) {
+      return res.status(400).send("user is not found");
+    }
+    //validate old password
+    const isValidPassword = await bcrypt.compare(oldPassword , user.password );
+
+    if (!isValidPassword) {
+      return res.status(400).send({errors : [{msg : "veuillez verifier votre ancien mot de passe"}]});
+    }
+   if (password !== confirmpassword)
+   {
+    return res.status(400).send({errors : [{msg : "veuillez verfifer votre nouveau mot de passe "}]});
+   }
+   //hash new password
+   const hashedPassword = await bcrypt.hash(password, 10);
+   
+   //update user's password
+
+    user.password = hashedPassword;
+    const updatedUserPassword =await user.save();
+
+    return res.json({success : [{msg :"votre mot de passe a eté modifié avec succes"}] , user : updatedUserPassword})
+    
+  
+  
+  } catch (error) {
+    return res.status(400).send({errors : [{msg : "veuillez verifier ultérieurement"}]})
+  }
+};
