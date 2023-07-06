@@ -7,6 +7,10 @@ import Error from "./Pages/Error/Error"
 import AddContact from "./Pages/AddContact/AddContact"
 import ListContacts from "./Pages/ListContacts/ListContact"
 import EditContact from "./Pages/EditContact/EditContact"
+import LoginUser from './Pages/LoginUser/LoginUser';
+import RegisterUser from './Pages/RegisterUser/RegisterUser';
+import UpdatePassword from './Pages/UpdatePassword/UpdatePassword';
+
 function App() {
   return (
     <div className="App">
@@ -17,6 +21,9 @@ function App() {
     <Route path="/AddContact" element={<AddContact/>} />
     <Route path="/ListContact" element={<ListContacts/>} />
     <Route path="/EditContact/:id" element={<EditContact/>} />
+    <Route path="/login" element={<LoginUser/>} />
+    <Route path="/register" element={<RegisterUser/>} />
+    <Route path="/updatepassword/:id" element ={<UpdatePassword/>} />
    </Routes>
     
     </div>

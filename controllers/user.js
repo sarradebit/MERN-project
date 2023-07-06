@@ -40,6 +40,7 @@ exports.login = async (req,res) => {
         return res.status(400).send({errors : [{msg : "veuillez verifier votre mot de passe "}]})
       }
       
+      
     } catch (error) {
         return res.status(400).send({errors: [{msg : "utilisateur verifier vos informations"}]})
         

@@ -1,5 +1,8 @@
 import {combineReducers} from "redux"
 import contactReducer from "./contact"
-const rootReducer = combineReducers({contactReducer})
+import userReducer from "./user"
+
+
+const rootReducer = combineReducers({contactReducer , userReducer})
 
 export default rootReducer
