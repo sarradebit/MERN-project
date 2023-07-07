@@ -10,8 +10,19 @@ import EditContact from "./Pages/EditContact/EditContact"
 import LoginUser from './Pages/LoginUser/LoginUser';
 import RegisterUser from './Pages/RegisterUser/RegisterUser';
 import UpdatePassword from './Pages/UpdatePassword/UpdatePassword';
+import { useEffect } from 'react';
+import { current } from './JS/Actions/user';
+import { useDispatch } from 'react-redux';
 
 function App() {
+
+  const dispatch = useDispatch()
+  useEffect(() => {
+if(localStorage.getItem("token")){
+  dispatch(current())
+}
+  },[dispatch])
+  
   return (
     <div className="App">
    <ResponsiveAppBar/>

@@ -13,15 +13,16 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-const settings = ['Profile', 'Logout'];
+
 
 function ResponsiveAppBar() {
   
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
  
-const navigate = useNavigate
+const navigate = useNavigate()
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -37,6 +38,8 @@ const navigate = useNavigate
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const isAuth = useSelector(state => state.userReducer.isAuth)
 
   return (
     <AppBar position="static">
@@ -152,14 +155,18 @@ const navigate = useNavigate
               </Button>
 
           </Box>
+           {isAuth ?
+           
+           <div>
 
-          <Box sx={{ flexGrow: 0 }}>
+           
+           
+           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
-            
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -176,13 +183,27 @@ const navigate = useNavigate
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+              
+                <MenuItem  onClick={handleCloseUserMenu}>
+                  <Typography textAlign="parametres"></Typography>
                 </MenuItem>
-              ))}
+              <MenuItem  onClick={handleCloseUserMenu}>
+                  <Typography textAlign="Logout"></Typography>
+                </MenuItem>
+                
+
             </Menu>
-          </Box>
+          </Box> 
+          </div>
+                  :
+                  <div>
+          <Box sx={{ flexGrow: 0 }}>
+          <MenuItem  onClick={() => { navigate ('/login') && handleCloseNavMenu();}}>
+            <Typography textAlign="center" >Login/Register</Typography>
+          </MenuItem>
+         </Box>
+         </div>
+         }
         </Toolbar>
       </Container>
     </AppBar>
