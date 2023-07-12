@@ -1,4 +1,4 @@
-const {check , validateResult, validationResult} = require ("express-validator")
+const {check , validationResult} = require ("express-validator")
 
 exports.registerValidator = () => [
 check("firstname" , "veuillez inséerer votre prénom!").not().isEmpty() , 

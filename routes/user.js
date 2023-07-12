@@ -5,9 +5,9 @@ const { validation, registerValidator, loginValidator } = require('../MiddleWare
 
 const router = express.Router()
 
-router.post("/register",registerValidator()  , validation, register)
+router.post("/register",registerValidator()  , validation, register);
 
-router.post("/login" , loginValidator , validation, login )
+router.post("/login" , loginValidator() , validation, login );
 
 router.get("/current" ,isAuth ,(req,res) => {
     res.send(req.user)

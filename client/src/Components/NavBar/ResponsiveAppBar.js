@@ -13,7 +13,8 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../JS/Actions/user';
 
 
 
@@ -22,7 +23,8 @@ function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
  
-const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -185,10 +187,10 @@ const navigate = useNavigate()
             >
               
                 <MenuItem  onClick={handleCloseUserMenu}>
-                  <Typography textAlign="parametres"></Typography>
+                  <Typography textAlign="center" >parametres</Typography>
                 </MenuItem>
               <MenuItem  onClick={handleCloseUserMenu}>
-                  <Typography textAlign="Logout"></Typography>
+                  <Typography textAlign="center" onClick={() =>dispatch(logout())}>Logout</Typography>
                 </MenuItem>
                 
 

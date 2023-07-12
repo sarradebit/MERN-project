@@ -39,7 +39,10 @@ exports.login = async (req,res) => {
       if(!checkPassword) {
         return res.status(400).send({errors : [{msg : "veuillez verifier votre mot de passe "}]})
       }
-      
+      const token = jwt.sign({
+        id : foundUser._id
+      },process.env.SCRT_KEY , { expiresIn : "48h"})
+      res.status(200).send({success : [{msg : "welcome back"}] , user : foundUser , token})
       
     } catch (error) {
         return res.status(400).send({errors: [{msg : "utilisateur verifier vos informations"}]})
@@ -54,10 +57,9 @@ exports.updateUserPassword = async (req,res) => {
     // get user
     const user = await User.findById(req.params);
     if (!user) {
-      return res.status(400).send("user is not found");
-    }
+      return res.status(400).send("user is not found")}
     //validate old password
-    const isValidPassword = await bcrypt.compare(oldPassword , user.password );
+    const isValidPassword = await bcrypt.compare(oldPassword , user.password )
 
     if (!isValidPassword) {
       return res.status(400).send({errors : [{msg : "veuillez verifier votre ancien mot de passe"}]});

@@ -16,7 +16,14 @@ export const getContacts = () => async (dispatch) => {
 export const addContact = (newContact,navigate) => async (dispatch) => {
     dispatch({type :LOAD_CONTACTS }) 
     try {
-        let result = await axios.post ('/api/contact/add-contact' , newContact)
+        const config = {
+            headers : {
+                authorization : localStorage.getItem("token")
+            }
+        }
+
+
+        let result = await axios.post ('/api/contact/add-contact' , newContact , config)
         dispatch ({type : ADD_CONTACT , payload : result.data})
         navigate('/ListContact')
         dispatch (getContacts())

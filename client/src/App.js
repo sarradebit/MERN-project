@@ -12,9 +12,11 @@ import RegisterUser from './Pages/RegisterUser/RegisterUser';
 import UpdatePassword from './Pages/UpdatePassword/UpdatePassword';
 import { useEffect } from 'react';
 import { current } from './JS/Actions/user';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
+
+  const isAuth = useSelector(state => state.userReducer.isAuth)
 
   const dispatch = useDispatch()
   useEffect(() => {
@@ -29,7 +31,8 @@ if(localStorage.getItem("token")){
    <Routes>
     <Route path="/" element={<Home/>} />
     <Route path="/*" element={<Error/>} />
-    <Route path="/AddContact" element={<AddContact/>} />
+    {isAuth ? <Route path="/AddContact" element={<AddContact/>} />  : null }
+    
     <Route path="/ListContact" element={<ListContacts/>} />
     <Route path="/EditContact/:id" element={<EditContact/>} />
     <Route path="/login" element={<LoginUser/>} />
