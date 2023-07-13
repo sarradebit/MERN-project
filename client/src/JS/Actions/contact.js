@@ -25,7 +25,7 @@ export const addContact = (newContact,navigate) => async (dispatch) => {
 
         let result = await axios.post ('/api/contact/add-contact' , newContact , config)
         dispatch ({type : ADD_CONTACT , payload : result.data})
-        navigate('/ListContact')
+        navigate('/ListContacts')
         dispatch (getContacts())
     } catch (error) {
         dispatch ({type : FAIL_CONTACTS , payload : error.response})

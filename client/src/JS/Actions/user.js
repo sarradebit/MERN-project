@@ -1,5 +1,5 @@
 import axios from "axios" ;
-import { CLEAR_ERRORSUSER, CLEAR_SUCCESSUSER, CURRENT_USER, FAIL_USER, LOAD_USER, LOGIN_USER, LOGOUT_USER, REGISTER_USER } from "../ActionTypes/user";
+import { CLEAR_ERRORSUSER, CLEAR_SUCCESSUSER, CURRENT_USER, FAIL_USER, LOAD_USER, LOGIN_USER, LOGOUT_USER, REGISTER_USER, UPDATE_USERPASSWORD } from "../ActionTypes/user";
 
 
 export const register = (newUser) => async(dispatch) => {
@@ -36,16 +36,39 @@ export const current = () => async (dispatch) => {
     } catch (error) {
         dispatch({type : FAIL_USER , payload : error.response.data.errors})
     }
-}   
+}  
+
+
+export const updateUserPassword = (id , newUser , navigate)=>async(dispatch)=>{
+    dispatch({type:LOAD_USER})
+    try{
+
+        const config = {
+            headers : {
+                authorization : localStorage.getItem("token")
+            }
+        }
+    
+        let result = await axios.put(`/api/user/UpdatePassword/${id}`, newUser, config)
+       
+        dispatch({type:UPDATE_USERPASSWORD, payload : result.data})
+        navigate('/')
+        
+    }
+    catch(error){
+        dispatch({type:FAIL_USER , payload:error.response.data.errors})
+
+    }
+}
 
 
 export const logout = () => async (dispatch) => {
     dispatch ({type : LOGOUT_USER})
 }
 
-export const clearErrorUser = () => {
+export const clearErrorsUser = () => {
     return {
-        type : CLEAR_ERRORSUSER
+        type : CLEAR_ERRORSUSER,
     };
 };
 

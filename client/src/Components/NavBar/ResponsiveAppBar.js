@@ -42,6 +42,7 @@ function ResponsiveAppBar() {
   };
 
   const isAuth = useSelector(state => state.userReducer.isAuth)
+  const user = useSelector(state=>state.userReducer.user)
 
   return (
     <AppBar position="static">
@@ -187,7 +188,7 @@ function ResponsiveAppBar() {
             >
               
                 <MenuItem  onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center" >parametres</Typography>
+                  <Typography textAlign="center" onClick={()=> navigate(`/updatepassword/${user._id}`)} >parametres</Typography>
                 </MenuItem>
               <MenuItem  onClick={handleCloseUserMenu}>
                   <Typography textAlign="center" onClick={() =>dispatch(logout())}>Logout</Typography>
@@ -200,7 +201,7 @@ function ResponsiveAppBar() {
                   :
                   <div>
           <Box sx={{ flexGrow: 0 }}>
-          <MenuItem  onClick={() => { navigate ('/login') && handleCloseNavMenu();}}>
+          <MenuItem  onClick={() => { navigate ('/Login') && handleCloseNavMenu();}}>
             <Typography textAlign="center" >Login/Register</Typography>
           </MenuItem>
          </Box>

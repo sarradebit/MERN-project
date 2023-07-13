@@ -24,7 +24,7 @@ const LoginUser = () => {
   const [user , setUser] = useState({});
 
   const handleChange = (e) => {
-    setUser({...user , [e.target.name] : e.target.value})
+    setUser({...user , [e.target.name] : e.target.value});
   }
   const handleUser = (e) => {
     e.preventDefault();
@@ -33,17 +33,17 @@ const LoginUser = () => {
 
   return (
     <div>
-     {isAuth ? navigate("/") :
+     {isAuth ? navigate ("/") :
      <div>
       <h1>Login user </h1>
     <br/><br/>
-    <TextField id="standard-basic" label="Email" variant="standard"
-     sx={{ m: 1, width: '25ch' }} onChange={handleChange} name='email' />
+    <TextField id="standard-basic" label="Email" variant="standard" onChange={handleChange} name ='email'
+     sx={{ m: 1, width: '25ch' }} />
     <br/><br/>
     <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
           <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
           <Input
-          onChange={handleChange} name='password'
+          onChange={handleChange} name ='password'
 
             id="standard-adornment-password"
             type={showPassword ? 'text' : 'password'}

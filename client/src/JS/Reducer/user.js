@@ -1,4 +1,4 @@
-import { CLEAR_ERRORSUSER, CLEAR_SUCCESSUSER, CURRENT_USER, FAIL_USER, LOAD_USER, LOGIN_USER, LOGOUT_USER, REGISTER_USER } from "../ActionTypes/user"
+import { CLEAR_ERRORSUSER, CLEAR_SUCCESSUSER, CURRENT_USER, EDIT_USERPASSWORD, FAIL_USER, LOAD_USER, LOGIN_USER, LOGOUT_USER, REGISTER_USER } from "../ActionTypes/user"
 
 
 
@@ -9,7 +9,7 @@ const initialState = {
     isAuth : false ,
     newUser : {} ,
     errors : null ,
-    success : null ,
+    success : null 
 
 }
 
@@ -24,7 +24,9 @@ case REGISTER_USER :
 case LOGIN_USER :
         localStorage.setItem("token" , payload.token)
     return {...state , loadUser : false , user : payload.user , isAuth : true, success : payload.success}
-case CURRENT_USER :
+    case EDIT_USERPASSWORD:
+        return{...state, loadUser:false, user:payload.updateUserPassword ,isAuth:true , success: payload.success}
+    case CURRENT_USER :
     return {...state , user : payload , isAuth : true , loadUser : false}
 case LOGOUT_USER :
     localStorage.removeItem("token")
@@ -41,7 +43,7 @@ case FAIL_USER :
 case CLEAR_ERRORSUSER :
         return {...state , errors : null }
 case CLEAR_SUCCESSUSER : 
-        return {...state , succes : null }
+        return {...state , success : null }
     
     
         default :

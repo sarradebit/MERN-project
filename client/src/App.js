@@ -13,10 +13,15 @@ import UpdatePassword from './Pages/UpdatePassword/UpdatePassword';
 import { useEffect } from 'react';
 import { current } from './JS/Actions/user';
 import { useDispatch, useSelector } from 'react-redux';
+import Successnotif from './Components/Successnotif/Successnotif';
+import Errornotif from './Components/Errornotif/Errornotif';
 
 function App() {
 
   const isAuth = useSelector(state => state.userReducer.isAuth)
+
+  const usererrors = useSelector(state=>state.userReducer.errors)
+  const usersuccess = useSelector(state=>state.userReducer.success)
 
   const dispatch = useDispatch()
   useEffect(() => {
@@ -27,6 +32,10 @@ if(localStorage.getItem("token")){
   
   return (
     <div className="App">
+
+   {usersuccess && usersuccess.map((el)=> <Successnotif success={el}/>)}
+   {usererrors && usererrors.map((el)=> <Errornotif errors={el}/>)}
+
    <ResponsiveAppBar/>
    <Routes>
     <Route path="/" element={<Home/>} />

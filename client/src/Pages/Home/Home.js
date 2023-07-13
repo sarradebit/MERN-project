@@ -1,9 +1,9 @@
 import React from 'react'
-
+import CarouSsel from '../../Components/CarouSsel/CarouSsel' ;
 const Home = () => {
   return (
     <div>
-      <h1>Mern </h1>
+      <CarouSsel/>
     </div>
   )
 }
